@@ -1,0 +1,64 @@
+1. Saudação personalizada
+def saudacao(nome):
+    try:
+        mensagem = f"Olá, {nome}! Seja bem-vindo(a)!"
+        return mensagem
+    except Exception as e:
+        return f"Erro: {e}"
+
+
+ 2. Calcular média e verificar aprovação
+def calcular_media(notas):
+    try:
+        media = sum(notas) / len(notas)
+
+        if media >= 7:
+            return f"Média: {media:.2f} - Aprovado!"
+        else:
+            return f"Média: {media:.2f} - Reprovado!"
+    except Exception as e:
+        return f"Erro: {e}"
+
+
+ 3. Maior e menor número
+def maior_menor(lista):
+    try:
+        maior = max(lista)
+        menor = min(lista)
+        return maior, menor
+    except Exception as e:
+        return f"Erro: {e}"
+
+
+# Desafio Extra: Login com arquivo (usando WITH)
+def salvar_usuarios():
+    try:
+        with open("usuarios.txt", "w") as arquivo:
+            arquivo.write("admin:1234\n")
+            arquivo.write("gregory:abcd\n")
+        return "Usuários salvos com sucesso!"
+    except Exception as e:
+        return f"Erro ao salvar: {e}"
+
+
+def login(usuario, senha):
+    try:
+        with open("usuarios.txt", "r") as arquivo:
+            for linha in arquivo:
+                user, pwd = linha.strip().split(":")
+                if user == usuario and pwd == senha:
+                    return "Login realizado com sucesso!"
+        return "Usuário ou senha incorretos."
+    except FileNotFoundError:
+        return "Arquivo de usuários não encontrado."
+    except Exception as e:
+        return f"Erro: {e}"
+
+
+# Testes
+print(saudacao("Gregory"))
+print(calcular_media([8, 7, 6]))
+print(maior_menor([10, 5, 8, 2, 15]))
+
+print(salvar_usuarios())
+print(login("gregory", "abcd"))
