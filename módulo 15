@@ -1,0 +1,235 @@
+import sqlite3
+
+conn = sqlite3.connect("clientes.db")
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL
+)
+""")
+
+conn.commit()
+
+
+def inserir_cliente():
+    nome = input("Digite o nome do cliente: ")
+    email = input("Digite o email do cliente: ")
+
+    cursor.execute("""
+    INSERT INTO clientes (nome, email)
+    VALUES (?, ?)
+    """, (nome, email))
+
+    conn.commit()
+
+    print("Cliente cadastrado com sucesso!")
+
+
+def listar_clientes():
+    cursor.execute("SELECT * FROM clientes")
+
+    clientes = cursor.fetchall()
+
+    print("\n===== CLIENTES =====")
+
+    for cliente in clientes:
+        print(cliente)
+
+
+def atualizar_cliente():
+    id_cliente = int(input("Digite o ID do cliente: "))
+    novo_nome = input("Digite o novo nome: ")
+    novo_email = input("Digite o novo email: ")
+
+    cursor.execute("""
+    UPDATE clientes
+    SET nome = ?, email = ?
+    WHERE id = ?
+    """, (novo_nome, novo_email, id_cliente))
+
+    conn.commit()
+
+    print("Cliente atualizado com sucesso!")
+
+
+def deletar_cliente():
+    id_cliente = int(input("Digite o ID do cliente para deletar: "))
+
+    cursor.execute("""
+    DELETE FROM clientes
+    WHERE id = ?
+    """, (id_cliente,))
+
+    conn.commit()
+
+    print("Cliente deletado com sucesso!")
+
+
+def buscar_clientes_a():
+    cursor.execute("""
+    SELECT * FROM clientes
+    WHERE nome LIKE 'A%'
+    """)
+
+    clientes = cursor.fetchall()
+
+    print("\n===== CLIENTES COM A =====")
+
+    for cliente in clientes:
+        print(cliente)
+
+
+while True:
+    print("\n===== MENU =====")
+    print("1 - Inserir Cliente")
+    print("2 - Listar Clientes")
+    print("3 - Atualizar Cliente")
+    print("4 - Deletar Cliente")
+    print("5 - Buscar Clientes com A")
+    print("6 - Sair")
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        inserir_cliente()
+
+    elif opcao == "2":
+        listar_clientes()
+
+    elif opcao == "3":
+        atualizar_cliente()
+
+    elif opcao == "4":
+        deletar_cliente()
+
+    elif opcao == "5":
+        buscar_clientes_a()
+
+    elif opcao == "6":
+        print("Programa encerrado.")
+        break
+
+    else:
+        print("Opção inválida.")
+
+conn.close()import sqlite3
+
+conn = sqlite3.connect("clientes.db")
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL
+)
+""")
+
+conn.commit()
+
+
+def inserir_cliente():
+    nome = input("Digite o nome do cliente: ")
+    email = input("Digite o email do cliente: ")
+
+    cursor.execute("""
+    INSERT INTO clientes (nome, email)
+    VALUES (?, ?)
+    """, (nome, email))
+
+    conn.commit()
+
+    print("Cliente cadastrado com sucesso!")
+
+
+def listar_clientes():
+    cursor.execute("SELECT * FROM clientes")
+
+    clientes = cursor.fetchall()
+
+    print("\n===== CLIENTES =====")
+
+    for cliente in clientes:
+        print(cliente)
+
+
+def atualizar_cliente():
+    id_cliente = int(input("Digite o ID do cliente: "))
+    novo_nome = input("Digite o novo nome: ")
+    novo_email = input("Digite o novo email: ")
+
+    cursor.execute("""
+    UPDATE clientes
+    SET nome = ?, email = ?
+    WHERE id = ?
+    """, (novo_nome, novo_email, id_cliente))
+
+    conn.commit()
+
+    print("Cliente atualizado com sucesso!")
+
+
+def deletar_cliente():
+    id_cliente = int(input("Digite o ID do cliente para deletar: "))
+
+    cursor.execute("""
+    DELETE FROM clientes
+    WHERE id = ?
+    """, (id_cliente,))
+
+    conn.commit()
+
+    print("Cliente deletado com sucesso!")
+
+
+def buscar_clientes_a():
+    cursor.execute("""
+    SELECT * FROM clientes
+    WHERE nome LIKE 'A%'
+    """)
+
+    clientes = cursor.fetchall()
+
+    print("\n===== CLIENTES COM A =====")
+
+    for cliente in clientes:
+        print(cliente)
+
+
+while True:
+    print("\n===== MENU =====")
+    print("1 - Inserir Cliente")
+    print("2 - Listar Clientes")
+    print("3 - Atualizar Cliente")
+    print("4 - Deletar Cliente")
+    print("5 - Buscar Clientes com A")
+    print("6 - Sair")
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        inserir_cliente()
+
+    elif opcao == "2":
+        listar_clientes()
+
+    elif opcao == "3":
+        atualizar_cliente()
+
+    elif opcao == "4":
+        deletar_cliente()
+
+    elif opcao == "5":
+        buscar_clientes_a()
+
+    elif opcao == "6":
+        print("Programa encerrado.")
+        break
+
+    else:
+        print("Opção inválida.")
+
+conn.close()
