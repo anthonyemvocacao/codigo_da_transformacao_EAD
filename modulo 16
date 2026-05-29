@@ -1,0 +1,80 @@
+import unittest
+from flask import Flask
+
+# -------------------------
+# FUNÇÕES E CLASSES
+# -------------------------
+
+def soma(a, b):
+    return a + b
+
+
+class Calculadora:
+
+    def somar(self, a, b):
+        return a + b
+
+    def dividir(self, a, b):
+        if b == 0:
+            raise ValueError("Não é possível dividir por zero")
+        return a / b
+
+
+# -------------------------
+# TESTES UNITÁRIOS
+# -------------------------
+
+class TestSoma(unittest.TestCase):
+
+    def test_soma(self):
+        self.assertEqual(soma(2, 3), 5)
+
+
+class TestCalculadora(unittest.TestCase):
+
+    def setUp(self):
+        self.calc = Calculadora()
+
+    def test_somar(self):
+        self.assertEqual(self.calc.somar(10, 5), 15)
+
+    def test_dividir(self):
+        self.assertEqual(self.calc.dividir(10, 2), 5)
+
+    def test_divisao_por_zero(self):
+        with self.assertRaises(ValueError):
+            self.calc.dividir(10, 0)
+
+
+# -------------------------
+# API FLASK
+# -------------------------
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return {"mensagem": "API funcionando"}
+
+
+# -------------------------
+# TESTE DA API
+# -------------------------
+
+class TestAPI(unittest.TestCase):
+
+    def setUp(self):
+        self.client = app.test_client()
+
+    def test_home(self):
+        response = self.client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+
+
+# -------------------------
+# EXECUÇÃO
+# -------------------------
+
+if __name__ == "__main__":
+    unittest.main()
