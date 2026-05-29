@@ -1,0 +1,60 @@
+saudação 
+
+
+def saudacao(nome):
+    print(f"Olá, {nome}! Seja bem-vindo(a).")
+
+# Teste
+saudacao("João")
+
+
+
+
+
+calcular_media:
+
+def calcular_media(nota1, nota2, nota3):
+    media = (nota1 + nota2 + nota3) / 3
+
+    if media >= 7:
+        print(f"Média: {media:.2f} - Aprovado")
+    else:
+        print(f"Média: {media:.2f} - Reprovado")
+
+# Teste
+calcular_media(8, 7, 9)
+
+
+
+maior e menor
+
+def maior_menor(lista):
+    maior = max(lista)
+    menor = min(lista)
+
+    print(f"Maior número: {maior}")
+    print(f"Menor número: {menor}")
+
+# Teste
+numeros = [10, 5, 8, 20, 3]
+maior_menor(numeros)
+
+
+
+
+validar Login:
+
+def validar_login(usuario, senha):
+    usuarios = {
+        "admin": "1234",
+        "joao": "abcd",
+        "maria": "5678"
+    }
+
+    if usuario in usuarios and usuarios[usuario] == senha:
+        print("Login realizado com sucesso!")
+    else:
+        print("Usuário ou senha incorretos!")
+
+# Teste
+validar_login("admin", "1234")
