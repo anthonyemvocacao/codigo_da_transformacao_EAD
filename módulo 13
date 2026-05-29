@@ -1,0 +1,63 @@
+1. calculadora.py
+
+try:
+    num1 = float(input("Digite o primeiro número: "))
+    num2 = float(input("Digite o segundo número: "))
+
+    resultado = num1 / num2
+
+    print(f"Resultado: {resultado}")
+
+except ZeroDivisionError:
+    print("Erro: Não é possível dividir por zero!")
+
+except ValueError:
+    print("Erro: Digite apenas números válidos.")
+    
+    
+    2. conta_bancaria.py
+    
+    
+    class SaldoInsuficienteError(Exception):
+    pass
+
+
+class ContaBancaria:
+    def __init__(self, saldo):
+        self.saldo = saldo
+
+    def sacar(self, valor):
+        if valor > self.saldo:
+            raise SaldoInsuficienteError(
+                "Saldo insuficiente para realizar o saque."
+            )
+
+        self.saldo -= valor
+        print(f"Saque realizado. Saldo atual: R$ {self.saldo:.2f}")
+
+
+try:
+    conta = ContaBancaria(500)
+    conta.sacar(700)
+
+except SaldoInsuficienteError as erro:
+    print(f"Erro: {erro}")
+    
+    
+    
+    3. validacao_usuario.py
+    
+
+
+    try:
+    idade = int(input("Digite sua idade: "))
+
+    if idade <= 0:
+        raise ValueError("A idade deve ser um número positivo.")
+
+    print(f"Idade cadastrada: {idade}")
+
+except ValueError as erro:
+    print(f"Erro: {erro}")
+    
+    
