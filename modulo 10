@@ -1,0 +1,90 @@
+1. arquivo_txt.py
+
+# Criando e escrevendo no arquivo
+
+with open("dados.txt", "w", encoding="utf-8") as arquivo:
+    arquivo.write("Nome: João\n")
+    arquivo.write("Idade: 25\n")
+    arquivo.write("Cidade: São Paulo\n")
+
+# Lendo o arquivo
+
+with open("dados.txt", "r", encoding="utf-8") as arquivo:
+    conteudo = arquivo.read()
+
+print(conteudo)
+
+
+
+
+2. clientes_json.py
+
+import json
+
+clientes = {
+    "cliente1": {
+        "nome": "João",
+        "idade": 25
+    },
+    "cliente2": {
+        "nome": "Maria",
+        "idade": 30
+    }
+}
+
+# Salvar JSON
+with open("clientes.json", "w", encoding="utf-8") as arquivo:
+    json.dump(clientes, arquivo, indent=4, ensure_ascii=False)
+
+# Carregar JSON
+with open("clientes.json", "r", encoding="utf-8") as arquivo:
+    dados = json.load(arquivo)
+
+print(dados)
+
+
+3. notas_csv.py
+
+import csv
+
+# Adicionando notas
+
+with open("notas.csv", "w", newline="", encoding="utf-8") as arquivo:
+    escritor = csv.writer(arquivo)
+
+    escritor.writerow(["Nome", "Nota"])
+    escritor.writerow(["João", 8.5])
+    escritor.writerow(["Maria", 9.0])
+    escritor.writerow(["Carlos", 7.5])
+
+# Lendo notas
+
+with open("notas.csv", "r", encoding="utf-8") as arquivo:
+    leitor = csv.reader(arquivo)
+
+    for linha in leitor:
+        print(linha)
+        
+        
+        
+4. backup.py (Desafio Extra)
+
+import shutil
+import os
+
+origem = "arquivos_importantes"
+destino = "backup"
+
+# Cria as pastas caso não existam
+os.makedirs(origem, exist_ok=True)
+os.makedirs(destino, exist_ok=True)
+
+# Exemplo de cópia
+for arquivo in os.listdir(origem):
+    caminho_origem = os.path.join(origem, arquivo)
+    caminho_destino = os.path.join(destino, arquivo)
+
+    if os.path.isfile(caminho_origem):
+        shutil.copy2(caminho_origem, caminho_destino)
+
+print("Backup realizado com sucesso!")
