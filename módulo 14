@@ -1,0 +1,35 @@
+import requests
+
+API_KEY = "SUA_API_KEY"
+cidade = input("Digite o nome da cidade: ")
+
+url = f"https://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={API_KEY}&lang=pt_br&units=metric"
+
+try:
+    resposta = requests.get(url)
+
+    resposta.raise_for_status()
+
+    dados = resposta.json()
+
+    temperatura = dados["main"]["temp"]
+    clima = dados["weather"][0]["description"]
+    umidade = dados["main"]["humidity"]
+
+    print("\n===== PREVISÃO DO TEMPO =====")
+    print(f"Cidade: {cidade}")
+    print(f"Temperatura: {temperatura}°C")
+    print(f"Clima: {clima}")
+    print(f"Umidade: {umidade}%")
+
+except requests.exceptions.HTTPError:
+    print("Erro HTTP: não foi possível acessar a API.")
+
+except requests.exceptions.ConnectionError:
+    print("Erro de conexão com a internet.")
+
+except requests.exceptions.Timeout:
+    print("Tempo de conexão esgotado.")
+
+except requests.exceptions.RequestException as erro:
+    print("Erro na requisição:", erro)
